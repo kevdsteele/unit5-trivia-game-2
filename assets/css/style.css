@@ -61,7 +61,7 @@ background-color: #ecf0f1;
 
 h2{
 margin:0;
-padding-top:30px;
+padding-top:20px;
 
 }
 
@@ -87,7 +87,7 @@ font-size:26px;
 
 
 #questionForm {
-height:550px;
+height:500px;
 
 border:1px solid black;
 text-align: center;
@@ -98,14 +98,15 @@ overflow:auto;
 
 .question {
 font-size:30px;
-margin-top:5px;
-margin-bottom:25px;
+margin-top:15px;
+margin-bottom:15px;
 text-align:center;
 width:100%;
 }
 
 .choices {
 font-size:24px;
+margin-top:50px;
 
 
 width:100;
@@ -120,7 +121,7 @@ padding: 10px 0px 10px 0px;
 height:25px;
 }
 
-#play, #submit {
+#play, #again {
 height:50px;
 width:100px;
 
@@ -129,7 +130,7 @@ width:100px;
 
 #results{
 position:relative;
-top: 40%;
+top: 10%;
 
 }
 
@@ -147,7 +148,8 @@ color:#a6a6a6;
 font-family: "Avengence Heroic Avenger AT", Arial, Helvetica, sans-serif;
 border-radius:5%;
 text-shadow: 1px 1px 1px #141414;
-padding-top:2px;
+padding-top:5px;
+margin-top:10px;
 }
 
 button:hover{
@@ -155,7 +157,7 @@ color:white;
 border:5px solid #a6a6a6;
 }
 
-#submit{
+#again{
 display:none;
 }
 
@@ -166,11 +168,17 @@ padding-bottom:20px;
 #logo{
 height:250px;
 
-padding-top:40px;
-padding-bottom:40px;
+padding-top:20px;
+padding-bottom:20px;
 }
 
 input:checked {
 background-color:#a6a6a6;
+}
+
+.gify{
+padding-top:15px;
+width:600px;
+height:300px;
 }
 
