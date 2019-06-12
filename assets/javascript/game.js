@@ -92,7 +92,8 @@ createQuestion(i) ;
 var userAnswer=$(this).val();
 $("#question-choices"+i).empty();
 if (userAnswer === questions[i].Answer) {
- $("#question-choices"+i).text("Correct!");
+  
+ $("#question-choices"+i).text("Good job! The correct answer was " + questions[i].Answer);
  correct++;
 
 }else {
