@@ -30,6 +30,12 @@ var timerId;
 var i=0;
 
 var numQuestions=questions.length;
+
+var beep = document.createElement("audio");
+beep.setAttribute("src", "https://www.soundjay.com/button/sounds/beep-02.mp3");
+
+var buzzer = document.createElement("audio");
+buzzer.setAttribute("src", "https://www.soundjay.com/misc/sounds/fail-buzzer-04.mp3");
 console.log("Number of questions is "+ numQuestions);
 
 
@@ -123,10 +129,15 @@ function countdown () {
 
   $("#timer").text(timer);
 
-
+  if (timer < 5 && timer >= 1) {
+    beep.play();
+  }
 
   if (timer === 0) {
+    buzzer.play();
+
     
+ 
     clearInterval(timerId);
     $("#question-choices"+i).empty();
     $("#question-choices"+i).text("Times up! The annswer was " + questions[i].Answer) ;
