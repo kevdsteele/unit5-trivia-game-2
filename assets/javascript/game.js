@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 
 
-
+/* array of object for trivia questions, choices, answers and giphys */
 var questions = [ {Question: "Which MCU movie featured Spider-Man’s first appearance?", choices: ["Spider-Man: Homecoming","Avengers: Age of Ultron", "Iron Man 3", "Captain America: Civil War"], Answer: "Captain America: Civil War", GIFY:"https://media.giphy.com/media/mBqeXY7DJThAc/giphy.gif"} , 
                  {Question: "Who played the Hulk before Mark Ruffalo?", choices: ["Liam Hemsworth","Gary Oldman", "Edward Norton", "Will Smith"], Answer: "Edward Norton", GIFY: "https://media.giphy.com/media/aS8ypUweGOXMA/giphy.gif"},
                  {Question: "What is the name of Thor’s hammer?", choices: ["Balder","Vanir", "Aesir", "Mjolnir"], Answer: "Mjolnir", GIFY: "https://media.giphy.com/media/xUPGGdn5TaL8Mfpwwo/giphy.gif"},
@@ -19,18 +19,21 @@ var questions = [ {Question: "Which MCU movie featured Spider-Man’s first appe
                 {Question: "Where is Black Panther from?", choices: ["Nakia","T'Chaka", "Wakanda", "T'Challa"], Answer: "Wakanda", GIFY:"https://media.giphy.com/media/SJCUEMsOm03EV3a7nn/giphy.gif"},
                 {Question: "Who plays Nick Fury?", choices: ["Morgan Freeman","Samuel L. Jackson", "Laurence Fishburne", "Denzel Washington"], Answer: "Samuel L. Jackson", GIFY:"https://media.giphy.com/media/PnwcgZJZ8jdbq/giphy.gif"}]
 
-var answers = [];
 
+/* variables to track score*/
 var correct=0;
 var incorrect =0;
 var unanswered =0;
 
+/*timer variables*/
 var timer=10;
 var timerId;
-var i=0;
 
+/* Variables to control manual loop through questions */
+var i=0;
 var numQuestions=questions.length;
 
+/* Variables for sound on time countdown*/
 var beep = document.createElement("audio");
 beep.setAttribute("src", "https://www.soundjay.com/button/sounds/beep-02.mp3");
 
@@ -40,10 +43,12 @@ console.log("Number of questions is "+ numQuestions);
 
 
 
+
+/*Listen for clicl to begin game  */
 $("#play").on("click", playGame);
 
 
-
+/*Create question */
 function createQuestion (i) {
  $("#questionForm").empty();
   var questionDiv =$("<div>");
@@ -60,59 +65,69 @@ function createQuestion (i) {
     $("#question"+i).append(choicesDiv);
    
     
-    console.log(questions[i].Question);
+    /*Loop through creating choices */
     for (j=0; j < questions[i].choices.length; j++) {
   
-      var questionInput = $('<input type ="radio" name ="' + 'q'+ i + '" value="' + questions[i].choices[j] + '">' + questions[i].choices[j] + '</input><br/>');
+    /*Create radio buttons */
+    var questionInput = $('<input type ="radio" name ="' + 'q'+ i + '" value="' + questions[i].choices[j] + '">' + questions[i].choices[j] + '</input><br/>');
     questionInput.addClass("radio");
-
-    
     $("#question-choices"+i).append(questionInput);
-    console.log(questions[i].choices[j]);}
+    }
 
 }
 
-
+/*Function to begin game play */
 function playGame () {
 
-  
+/*Hide play again button and show timer */  
 $("#again").css("display", "none");
 $("#timer").css("display", "inline-block");
 $("#timer").text("10");
 
 
-
+/*Make sure question ares is clered each pass */
 $("#questionForm").empty();  
 
+/*Call question function with for question array  with current i value */
 createQuestion(i) ;
 
 
+/*Capture the choice and compare to answer */
  $(".radio").on("click", function() {
+  /*Stop timer */
   clearInterval(timerId);
 var userAnswer=$(this).val();
 $("#question-choices"+i).empty();
 if (userAnswer === questions[i].Answer) {
   
  $("#question-choices"+i).text("Good job! The correct answer was " + questions[i].Answer);
+ /*Increase correct count */
  correct++;
 
 }else {
   $("#question-choices"+i).text("What??!! The correct answer was " + questions[i].Answer);
-incorrect++;
+/* Increase incorrect count*/
+  incorrect++;
 }
+
+/*Create giphy placeholder and get image from array */
 var gifImg = $("<img>");
 gifImg.attr("src", questions[i].GIFY);
 gifImg.addClass("gify");
 $("#question"+i).append(gifImg);
+
+/*Increase i for next questions */
 i++;
+
+/*Reset timer for next question */
 timer=10;
-console.log("i is " + i);
-console.log("num ques is " + numQuestions);
+
+/*Check for end of Game and call function else continue playing sending i for next question */
 if (i >= numQuestions) {
-setTimeout(endGame, 4000);
+setTimeout(endGame, 3000);
 
 } else {
-setTimeout(playGame, 4000,i );}
+setTimeout(playGame, 3000,i );}
 
 
 
@@ -122,6 +137,7 @@ setTimeout(playGame, 4000,i );}
  });
   
 
+ /* Time functionality */
 clearInterval(timerId);
 timerId = setInterval(countdown, 1000);
 
@@ -130,14 +146,16 @@ function countdown () {
 
   $("#timer").text(timer);
 
+  /*Play beep when below 5 seconds */
   if (timer < 5 && timer >= 1) {
     beep.play();
   }
 
+  /*Play buzzer if timer reaches 0 */
   if (timer === 0) {
     buzzer.play();
 
-    
+    /*Process unaswered question*/
  
     clearInterval(timerId);
     $("#question-choices"+i).empty();
@@ -148,7 +166,8 @@ function countdown () {
     $("#question"+i).append(gifImg);
     i++;
     unanswered++;
-timer=10;
+    timer=10;
+
 if (i >= numQuestions) {
   setTimeout(endGame, 4000);
   
@@ -163,7 +182,7 @@ if (i >= numQuestions) {
   
   
 
-
+/*function to process end of game */
 function endGame() {
 
 clearInterval(timerId);
@@ -192,13 +211,12 @@ $("#questionForm").append(resultDiv);
 $("#results").append(correctDiv, incorrectDiv, unansweredDiv,gifImg);
 
   
- console.log("Correct " + correct);
- console.log("Incorrect " + incorrect);
- console.log("Unaswered "+ unanswered);
+ /* Process for play again by hiding timer and showing button*/
 
  $("#timer").css("display", "none");
  $("#again").css("display", "inline-block");
 
+ /*reset variables to play again without refreshing page */
  $("#again").on("click",function() {
 timer=10;
 i=0;
