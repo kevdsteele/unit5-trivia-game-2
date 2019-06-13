@@ -46,23 +46,20 @@ padding-top:35px;
 }
 
 #footer {
-    height:100px;
-    text-align:center;
-  
-    background-color: #a91101;
-    font-size:26px;
-    color: white;
+height:100px;
+text-align:center;
+background-color: #a91101;
+font-size:26px;
+color: white;
 border-top:10px solid #a91101;
 background-image:linear-gradient(#a91101, #141414);
     }
-
 
 
 body{
 font-family: "Aviano Black";
 font-size: 12px;
 background-color: #ecf0f1;
-
 }
 
 h2{
@@ -82,7 +79,7 @@ left:25%;
 margin: -300px 0 0 -150px;
 }
 
-#timer-header {
+/*#timer-header {
 border:1px solid black;
 background-color:blue;
 margin-bottom:5px;
@@ -90,13 +87,12 @@ height:100px;
 text-align:center;
 font-size:26px;
 
-}
+}*/
 
 
 
 #questionForm {
 height:500px;
-
 border:1px solid black;
 text-align: center;
 background-color:white;
@@ -117,12 +113,8 @@ font-size:24px;
 margin-top:40px;
 display:inline-block;
 text-align:left;
-
-
 width:100;
 padding: 10px 0px 10px 0px;
-
-
 }
 
 
@@ -179,14 +171,11 @@ padding-bottom:20px;
 #logo{
 height:250px;
 width:550px;
-
 padding-top:20px;
 padding-bottom:20px;
 }
 
-input:checked {
-background-color:#a6a6a6;
-}
+
 
 .gify{
 padding-top:15px;
